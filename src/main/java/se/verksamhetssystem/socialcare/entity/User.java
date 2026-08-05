@@ -2,6 +2,8 @@ package se.verksamhetssystem.socialcare.entity;
 
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Set;
 
 
 @Entity
@@ -28,9 +30,12 @@ public class User {
     @Column(nullable = false, updatable = false)
     private LocalDateTime createdAt;
 
+    @OneToMany(mappedBy = "assignedCaseworker", fetch = FetchType.LAZY)
+    private Set<Client> clients = new HashSet<>();
+
     public User() {
     }
-    
+
     @PrePersist
     private void onCreate() {
         createdAt = LocalDateTime.now();
@@ -74,6 +79,10 @@ public class User {
 
     public LocalDateTime getCreatedAt() {
         return createdAt;
+    }
+    
+    public Set<Client> getClients() {
+        return clients;
     }
     
 }
