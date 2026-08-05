@@ -85,4 +85,20 @@ public class User {
         return clients;
     }
     
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof User)) return false;
+        return id != null && id.equals(((User) o).getId());
+    }
+    
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
+    }
+    
+    @Override
+    public String toString() {
+        return "User{id=" + id + ", name='" + name + "', role=" + role + "}";
+    }
 }
